@@ -1,0 +1,32 @@
+def remove_html(string):
+    return re.sub('<.*?>', '', string)
+
+def remove_punctuations(string):
+    rem = ''
+    for i in string:
+        if i.isalnum():
+            rem = rem + i
+        else:
+            rem = rem + ' '
+    return rem.lower()
+
+def remove_extra_spaces(string):
+    return re.sub(" +", " ", string)
+
+def remove_stopwords(string):
+    stop_words = set(stopwords.words('english'))
+    words = word_tokenize(string)
+    return [w for w in words if w not in stop_words]
+
+def lemmentization(string):
+    lemme = WordNetLemmatizer()
+    string = lemme.lemmatize(string)
+
+def group_text(array):
+    stemmer = SnowballStemmer(language="english")
+    return " ".join([stemmer.stem(w) for w in array])
+    # step_words = []
+    # for word in array:
+    #     temp = stemmer.stem(word)
+    #     step_words.append(temp)
+    # return step_words
